@@ -1,18 +1,31 @@
-## Getting Started
+## Assignment 2 - ETL Pipeline
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## Assumptions
+- Input CSV file is named `products.csv` and is located in the `data/` folder.
+- Output file is always written to `data/transformed_products.csv`.
+- The program must be run from the **project root** so relative paths resolve correctly.
+- If the input file is missing, the program prints an error and exits.  
+- If the input file only has a header (empty input), the program still writes an output file with just the header.
 
-## Folder Structure
+## Design Notes
+- Extract → Transform → Load design:
+  1. **Extract**: Reads `products.csv` with a simple CSV parser using `BufferedReader`.
+  2. **Transform**:
+     - Converts product names to uppercase.
+     - Applies 10% discount to Electronics, rounding to 2 decimals with `RoundingMode.HALF_UP`.
+     - If discounted price > 500.00 in Electronics → category changed to *Premium Electronics*.
+     - Computes a `PriceRange` from the final price:
+       - 0–10 → Low  
+       - 10.01–100 → Medium  
+       - 100.01–500 → High  
+       - 500.01+ → Premium
+  3. **Load**: Writes `transformed_products.csv` using `BufferedWriter` with header row included.
 
-The workspace contains two folders by default, where:
+## AI Usage
+I used AI to clarify project structure, relative paths, and CSV handling in Java.
+	•	AI provided code examples for reading/writing CSVs with BufferedReader/BufferedWriter.
+I modified the code to:
+	•	Add a helper method for rounding with BigDecimal.
+	•	Ensure the header row was skipped properly during extraction.
+	•	Print summary counts after execution for easier debugging.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
