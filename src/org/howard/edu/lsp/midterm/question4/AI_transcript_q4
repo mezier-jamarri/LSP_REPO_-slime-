@@ -1,0 +1,47 @@
+Input:
+I need to build a smart-campus device system using inheritance and interfaces. There’s already a Device abstract class provided, and I need to create subclasses for DoorLock, Thermostat, and Camera. I’m a bit unsure how to organize everything.
+
+Output:
+The Device abstract class is your base. It already has shared properties like id, location, and connection state. You’ll extend this class in each of your device types. Each subclass should call super(id, location) inside its constructor.
+
+Input:
+Okay, so what about the interfaces? It says I need to use Networked and BatteryPowered.
+
+Output:
+Yes. Networked should define connect(), disconnect(), and isConnected(). BatteryPowered should define getBatteryPercent() and setBatteryPercent(). Some devices, like Thermostat, only use Networked, while DoorLock and Camera use both.
+
+Input:
+Do I have to create both interfaces myself?
+
+Output:
+Yes, create them in the same package. They’ll just contain method headers, not implementations. Then in each concrete class, you’ll implement the methods exactly as described in the instructions.
+
+Input:
+For DoorLock, the instructions say to call setBatteryPercent(initialBattery) in the constructor. Do I just use that to check the 0–100 range?
+
+Output:
+Exactly. Your setBatteryPercent() method should throw an IllegalArgumentException if the value is outside 0..100. That way, if you try to create a device with something like -5, it will throw the exception automatically.
+
+Input:
+And getStatus() needs to show everything, right?
+
+Output:
+Yes, build a string like:
+“DoorLock[id=DL-101, loc=DormA-1F, conn=up, batt=85%]”
+You can check the connection state with isConnected() and include the battery percentage. Thermostat’s status shows the temperature instead, and Camera’s looks just like DoorLock’s.
+
+Input:
+Once I’m done, how can I check if it runs correctly?
+
+Output:
+From the terminal, navigate to your LSP_REPO_-slime- folder. Then run:
+javac src/org/howard/edu/lsp/midterm/question4/*.java
+If everything compiles, run:
+java -cp src org.howard.edu.lsp.midterm.question4.Main
+That will execute the provided Main driver and show the device statuses, timestamps, and exceptions.
+
+Input:
+I tested it, and the timestamps don’t match your example. They’re bigger numbers. Is that a problem?
+
+Output:
+No, that’s normal. They’re real-time Unix timestamps. As long as they’re non-zero and all update after calling heartbeat(), your code is correct.

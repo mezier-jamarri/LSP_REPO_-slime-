@@ -1,0 +1,34 @@
+Input:
+I have to write a Java program for my midterm that calculates the area of different shapes using method overloading. The class is called AreaCalculator and it needs four methods for circle, rectangle, triangle, and square. Each one should throw an exception if any number is less than or equal to zero. There’s also a Main class that prints specific outputs. Can you walk me through what I’m supposed to do?
+
+Output:
+Sure! Start by creating a public class called AreaCalculator. Inside, define four versions of a static method called area. Each method will have different parameters to represent the shapes. For example, one takes a radius, another takes width and height, another takes base and height, and the last one takes a single side for the square.
+
+Input:
+So should all of them just be called “area”? Or should I name them circleArea and rectangleArea instead?
+
+Output:
+Keep them all named “area.” That’s what overloading means — multiple methods with the same name but different parameters. Java will know which one to use based on the number and type of arguments.
+
+Input:
+What’s the right way to handle invalid inputs?
+
+Output:
+Each method should check if its parameters are greater than zero. If not, use: throw new IllegalArgumentException(“Invalid input”). Then you can use a try/catch block in your Main class to test the exception handling.
+
+Input:
+Should these methods be static?
+
+Output:
+Yes, make them static. That way you can call them directly in the main method like AreaCalculator.area(5.0, 2.0) without creating an object.
+
+Input:
+Alright. And the output has to be formatted exactly like this:
+Circle radius 3.0 → area = 28.274333882308138
+Rectangle 5.0 x 2.0 → area = 10.0
+Triangle base 10, height 6 → area = 30.0
+Square side 4 → area = 16.0
+
+Output:
+Correct. Print them exactly like that using System.out.println statements. Then add one more line that deliberately triggers an exception by passing a negative number to show your error message.
+
